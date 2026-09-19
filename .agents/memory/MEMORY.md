@@ -1,0 +1,1 @@
+- [Mockup carousel motion](mockup-carousel-motion.md) — use numeric Framer Motion x offsets for reliable Cover Flow side cards.
