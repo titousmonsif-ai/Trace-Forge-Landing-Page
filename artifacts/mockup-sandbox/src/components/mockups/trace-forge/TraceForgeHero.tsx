@@ -26,53 +26,48 @@ type StyleCard = {
 };
 
 const VIDEO_URL =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_105406_16f4600d-7a92-4292-b96e-b19156c7830a.mp4";
+  "/__mockup/images/trace-forge/hero.mp4";
 
 const styles: StyleCard[] = [
   {
     name: "Hardstyle",
     eyebrow: "High impact",
     description: "Snap-cut pacing, bass-led energy, no dead air.",
-    image:
-      "https://images.pexels.com/photos/1699030/pexels-photo-1699030.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    fallback: "linear-gradient(135deg, #ff734f 0%, #421b4d 48%, #08142c 100%)",
-    accent: "#ff8566",
+    image: "/__mockup/images/trace-forge/styles/hardstyle.jpg",
+    fallback: "linear-gradient(135deg, #2b1553 0%, #100b1e 52%, #09090b 100%)",
+    accent: "#A855F7",
   },
   {
     name: "Flow Style",
     eyebrow: "Natural rhythm",
     description: "A fluid sequence that follows the thought, not the clock.",
-    image:
-      "https://images.pexels.com/photos/3771839/pexels-photo-3771839.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    fallback: "linear-gradient(140deg, #1aa8c4 0%, #133a60 46%, #071421 100%)",
-    accent: "#64cefb",
+    image: "/__mockup/images/trace-forge/styles/flow.jpg",
+    fallback: "linear-gradient(140deg, #47218c 0%, #19102c 48%, #09090b 100%)",
+    accent: "#A855F7",
   },
   {
     name: "Jugg Style",
     eyebrow: "Fast cuts",
     description: "Keep attention moving with playful, precise interruption.",
-    image:
-      "https://images.pexels.com/photos/3945313/pexels-photo-3945313.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    fallback: "linear-gradient(135deg, #e8b04e 0%, #723a25 50%, #151820 100%)",
-    accent: "#f1c96a",
+    image: "/__mockup/images/trace-forge/styles/jugg.jpg",
+    fallback: "linear-gradient(135deg, #662e91 0%, #231039 50%, #09090b 100%)",
+    accent: "#A855F7",
   },
   {
     name: "Block Style",
     eyebrow: "Clean structure",
     description: "A confident grid of moments, captions, and clean silence.",
-    image:
-      "https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    fallback: "linear-gradient(135deg, #be5eab 0%, #3d204e 52%, #080d1d 100%)",
-    accent: "#e88bd2",
+    image: "/__mockup/images/trace-forge/styles/block.jpg",
+    fallback: "linear-gradient(135deg, #54206b 0%, #1d1028 52%, #09090b 100%)",
+    accent: "#A855F7",
   },
   {
     name: "Hormozi Style",
     eyebrow: "Clarity first",
     description: "Make the idea impossible to miss. Then make it memorable.",
-    image:
-      "https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    fallback: "linear-gradient(135deg, #69c994 0%, #154a49 52%, #071825 100%)",
-    accent: "#83e2a8",
+    image: "/__mockup/images/trace-forge/styles/hormozi.jpg",
+    fallback: "linear-gradient(135deg, #7d35c7 0%, #2e164d 52%, #09090b 100%)",
+    accent: "#A855F7",
   },
 ];
 
@@ -138,9 +133,11 @@ function StyleCardView({
       animate={{
         x: positionX,
         scale: active ? 1 : Math.abs(offset) === 1 ? 0.86 : 0.74,
-        rotateY: active ? 0 : offset * -24,
-        rotateZ: active ? 0 : offset * (Math.abs(offset) === 1 ? 1.6 : 3),
-        opacity: active ? 1 : isVisible ? (Math.abs(offset) === 1 ? 0.64 : 0.28) : 0,
+        rotateY: active ? 0 : offset < 0 ? 35 : -35,
+        rotateZ: active ? 0 : offset * (Math.abs(offset) === 1 ? 1 : 2),
+        z: active ? 70 : -Math.abs(offset) * 20,
+        opacity: active ? 1 : isVisible ? (Math.abs(offset) === 1 ? 0.48 : 0.16) : 0,
+        transformPerspective: 1200,
         zIndex: 20 - Math.abs(offset),
       }}
       transition={
@@ -148,12 +145,22 @@ function StyleCardView({
           ? { duration: 0 }
           : { type: "spring", stiffness: 250, damping: 27, mass: 0.8 }
       }
-      className="absolute left-1/2 top-1/2 origin-center -translate-x-1/2 -translate-y-1/2 cursor-grab touch-pan-y rounded-[1.65rem] text-left outline-none focus-visible:ring-2 focus-visible:ring-[#64CEFB] focus-visible:ring-offset-4 focus-visible:ring-offset-[#09111c] active:cursor-grabbing"
-      style={{ width: cardWidth, height: "clamp(270px, 31vw, 420px)", perspective: 1000 }}
+      className="absolute left-1/2 top-[calc(50%+96px)] origin-center -translate-x-1/2 -translate-y-1/2 cursor-grab touch-pan-y rounded-[1.65rem] text-left outline-none [transform-style:preserve-3d] focus-visible:ring-2 focus-visible:ring-[#A855F7] focus-visible:ring-offset-4 focus-visible:ring-offset-[#09090B] active:cursor-grabbing lg:top-1/2"
+      style={{
+        width: cardWidth,
+        height: "clamp(270px, 31vw, 420px)",
+        transformStyle: "preserve-3d",
+      }}
     >
       <span
-        className="absolute inset-0 overflow-hidden rounded-[1.65rem] border border-white/20 bg-[#102031] shadow-[0_30px_80px_rgba(0,0,0,.45)]"
-        style={imageFailed ? { background: card.fallback } : undefined}
+        className="absolute inset-0 overflow-hidden rounded-[1.65rem] border bg-[#09090B]"
+        style={{
+          ...(imageFailed ? { background: card.fallback } : {}),
+          borderColor: active ? "#A855F7" : "rgba(255,255,255,.14)",
+          boxShadow: active
+            ? "0 0 0 1px rgba(168,85,247,.32), 0 0 70px rgba(139,92,246,.28), 0 28px 80px rgba(0,0,0,.58)"
+            : "0 24px 70px rgba(0,0,0,.48)",
+        }}
       >
         {!imageFailed && (
           <img
@@ -163,9 +170,9 @@ function StyleCardView({
             onError={() => setImageFailed(true)}
           />
         )}
-        <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,9,17,.05)_24%,rgba(4,9,17,.3)_55%,rgba(4,9,17,.95)_100%)]" />
-        <span className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(255,255,255,.12),transparent)]" />
-        <span className="absolute left-5 top-5 flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.22em] text-white/65">
+        <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,11,.02)_22%,rgba(9,9,11,.18)_52%,rgba(9,9,11,.96)_100%)]" />
+        <span className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(255,255,255,.1),transparent)]" />
+        <span className="absolute left-5 top-5 flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.22em] text-white/70">
           <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: card.accent }} />
           {card.eyebrow}
         </span>
@@ -180,8 +187,7 @@ function StyleCardView({
         {active && (
           <motion.span
             layoutId="active-card-line"
-            className="absolute bottom-0 left-5 right-5 h-0.5 rounded-full"
-            style={{ backgroundColor: card.accent }}
+            className="absolute bottom-0 left-5 right-5 h-0.5 rounded-full bg-[#A855F7] shadow-[0_0_18px_rgba(168,85,247,.95)]"
           />
         )}
       </span>
@@ -215,7 +221,7 @@ export function TraceForgeHero() {
   };
 
   return (
-    <main className="min-h-[100dvh] overflow-x-hidden bg-[#07101b] font-['DM_Sans'] text-white selection:bg-[#64CEFB] selection:text-[#07101b]">
+    <main className="min-h-[100dvh] overflow-x-hidden bg-[#09090B] font-['DM_Sans'] text-white selection:bg-[#A855F7] selection:text-[#09090B]">
       <section id="home" className="relative isolate flex min-h-[100dvh] flex-col overflow-hidden">
         <video
           className="absolute inset-0 -z-20 h-screen w-full object-cover"
@@ -227,21 +233,20 @@ export function TraceForgeHero() {
         >
           <source src={VIDEO_URL} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 -z-10 bg-[#050a12]/70" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_71%_42%,rgba(37,149,190,.2),transparent_34%),linear-gradient(90deg,rgba(5,10,18,.97)_0%,rgba(5,10,18,.72)_40%,rgba(5,10,18,.3)_100%)]" />
-        <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,.4)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.4)_1px,transparent_1px)] [background-size:80px_80px] [mask-image:linear-gradient(90deg,black,transparent_66%)]" />
+        <div className="absolute inset-0 -z-10 bg-black/80" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_68%_38%,rgba(139,92,246,.28),transparent_30%),radial-gradient(circle_at_20%_52%,rgba(168,85,247,.18),transparent_32%),linear-gradient(90deg,rgba(9,9,11,.98)_0%,rgba(9,9,11,.78)_42%,rgba(9,9,11,.36)_100%)]" />
 
         <header className="relative z-30 mx-auto flex w-full max-w-[1480px] items-center justify-between px-5 py-5 sm:px-8 lg:px-12 xl:py-8">
           <a href="#home" className="group flex items-center gap-3" aria-label="Trace.ai home">
             <BrandMark />
             <span className="text-[1.05rem] font-semibold tracking-[-0.04em] text-white">
-              Trace<span className="text-[#64CEFB]">.ai</span>
+              Trace<span className="text-[#A855F7]">.ai</span>
             </span>
           </a>
 
           <nav
             aria-label="Primary navigation"
-            className="hidden items-center gap-1 rounded-full border border-gray-700/80 bg-[#07111d]/55 p-1.5 backdrop-blur-xl lg:flex"
+            className="hidden items-center gap-1 rounded-full border border-white/10 bg-black/55 p-1.5 shadow-[0_0_32px_rgba(139,92,246,.1)] backdrop-blur-xl lg:flex"
           >
             {navItems.map((item) => (
               <a
@@ -255,7 +260,7 @@ export function TraceForgeHero() {
             <a
               href="#contact"
               aria-label="Go to contact section"
-              className="group ml-1 flex h-9 w-9 items-center justify-center rounded-full bg-[#64CEFB] text-[#06101b] transition-transform hover:scale-105"
+              className="group ml-1 flex h-9 w-9 items-center justify-center rounded-full bg-[#A855F7] text-[#09090B] shadow-[0_0_22px_rgba(168,85,247,.55)] transition-transform hover:scale-105"
             >
               <ArrowDownRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
             </a>
@@ -266,7 +271,7 @@ export function TraceForgeHero() {
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-[#07111d]/65 text-white lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-[#A855F7]/60 bg-black/65 text-white shadow-[0_0_22px_rgba(168,85,247,.25)] lg:hidden"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -278,7 +283,7 @@ export function TraceForgeHero() {
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
-              className="absolute right-5 top-[78px] z-40 w-[min(280px,calc(100vw-40px))] rounded-3xl border border-white/15 bg-[#07111d]/95 p-3 shadow-2xl backdrop-blur-xl lg:hidden"
+              className="absolute right-5 top-[78px] z-40 w-[min(280px,calc(100vw-40px))] rounded-3xl border border-[#A855F7]/45 bg-[#09090B]/95 p-3 shadow-2xl backdrop-blur-xl lg:hidden"
               aria-label="Mobile navigation"
             >
               {navItems.map((item) => (
@@ -303,13 +308,13 @@ export function TraceForgeHero() {
             className="relative z-20 max-w-[680px]"
           >
             <div className="mb-5 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/62 sm:mb-7">
-              <span className="h-px w-9 bg-[#64CEFB]" />
+              <span className="h-px w-9 bg-[#A855F7] shadow-[0_0_14px_rgba(168,85,247,.9)]" />
               Professional video editing powered by AI.
             </div>
             <h1 className="font-['Space_Grotesk'] text-5xl font-medium leading-[0.85] tracking-[-0.095em] text-white sm:text-7xl lg:text-8xl 2xl:text-9xl">
               <span className="block">Edit fast to</span>
               <motion.span
-                className="mt-2 block whitespace-nowrap bg-[linear-gradient(105deg,#64CEFB_35%,#fff_48%,#64CEFB_60%)] bg-[length:230%_100%] bg-clip-text text-transparent"
+                className="mt-2 block whitespace-nowrap bg-[linear-gradient(105deg,#8B5CF6_35%,#fff_48%,#A855F7_60%)] bg-[length:230%_100%] bg-clip-text text-transparent"
                 animate={
                   reduceMotion
                     ? { backgroundPosition: "0% 0%" }
@@ -332,10 +337,10 @@ export function TraceForgeHero() {
               <button
                 type="button"
                 onClick={() => setCtaMessage(true)}
-                className="group inline-flex items-center gap-4 rounded-full bg-black px-5 py-3.5 text-[12px] font-semibold text-white shadow-[0_12px_30px_rgba(0,0,0,.22)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#64CEFB] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07101b]"
+                className="group inline-flex items-center gap-4 rounded-full bg-black px-5 py-3.5 text-[12px] font-semibold text-white shadow-[0_0_0_1px_rgba(168,85,247,.48),0_0_28px_rgba(139,92,246,.2)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090B]"
               >
                 Start Editing Now
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#64CEFB] text-[#07101b]">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#A855F7] text-[#09090B] shadow-[0_0_18px_rgba(168,85,247,.65)]">
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </button>
@@ -353,7 +358,7 @@ export function TraceForgeHero() {
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="mt-4 text-xs text-[#8fe5ff]"
+                  className="mt-4 text-xs text-[#C084FC]"
                   role="status"
                 >
                   Your edit suite is ready. Pick a style to start your first cut.
@@ -369,9 +374,9 @@ export function TraceForgeHero() {
             transition={{ delay: 0.22, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             className="relative mt-12 min-h-[365px] lg:mt-0 lg:min-h-[485px]"
           >
-            <div className="absolute left-1/2 top-1/2 h-[76%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1c99be]/15 blur-[75px]" />
-            <div className="absolute left-1/2 top-1/2 h-[88%] w-px -translate-x-1/2 -translate-y-1/2 bg-gradient-to-b from-transparent via-[#64CEFB]/35 to-transparent" />
-            <div className="absolute left-1/2 top-1/2 h-px w-[94%] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-[#64CEFB]/25 to-transparent" />
+            <div className="absolute left-1/2 top-1/2 h-[76%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8B5CF6]/20 blur-[85px]" />
+            <div className="absolute left-1/2 top-1/2 h-[88%] w-px -translate-x-1/2 -translate-y-1/2 bg-gradient-to-b from-transparent via-[#A855F7]/35 to-transparent" />
+            <div className="absolute left-1/2 top-1/2 h-px w-[94%] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-[#A855F7]/25 to-transparent" />
             <div className="relative h-full [perspective:1200px]">
               {visibleCards.map(({ card, index, offset }) => (
                 <StyleCardView
@@ -390,7 +395,7 @@ export function TraceForgeHero() {
                 type="button"
                 onClick={() => handleSwipe(-1)}
                 aria-label="Previous editing style"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-[#07111d]/60 text-white/65 transition-colors hover:border-white/55 hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white/65 transition-colors hover:border-[#A855F7] hover:text-white"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -404,7 +409,7 @@ export function TraceForgeHero() {
                     aria-selected={index === activeIndex}
                     onClick={() => setActiveIndex(index)}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      index === activeIndex ? "w-7 bg-[#64CEFB]" : "w-1.5 bg-white/35 hover:bg-white/70"
+                      index === activeIndex ? "w-7 bg-[#A855F7] shadow-[0_0_12px_rgba(168,85,247,.8)]" : "w-1.5 bg-white/35 hover:bg-[#C084FC]"
                     }`}
                   />
                 ))}
@@ -413,7 +418,7 @@ export function TraceForgeHero() {
                 type="button"
                 onClick={() => handleSwipe(1)}
                 aria-label="Next editing style"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-[#07111d]/60 text-white/65 transition-colors hover:border-white/55 hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white/65 transition-colors hover:border-[#A855F7] hover:text-white"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -434,10 +439,10 @@ export function TraceForgeHero() {
         </div>
       </section>
 
-      <section id="about" className="relative overflow-hidden border-t border-white/10 bg-[#0a1825] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+      <section id="about" className="relative overflow-hidden border-t border-white/10 bg-[#0d0a14] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
         <div className="mx-auto grid max-w-[1240px] gap-14 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
           <div>
-            <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#64CEFB]">The edit suite, rethought</p>
+            <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#C084FC]">The edit suite, rethought</p>
             <h2 className="max-w-md font-['Space_Grotesk'] text-4xl font-medium leading-[0.95] tracking-[-0.07em] text-white sm:text-6xl">
               More instinct.
               <br />
@@ -446,14 +451,14 @@ export function TraceForgeHero() {
           </div>
           <div className="grid gap-10 sm:grid-cols-2">
             <div>
-              <span className="mb-5 block font-['Space_Grotesk'] text-5xl tracking-[-0.08em] text-[#64CEFB]">01</span>
+              <span className="mb-5 block font-['Space_Grotesk'] text-5xl tracking-[-0.08em] text-[#A855F7]">01</span>
               <h3 className="mb-3 text-lg font-medium text-white">Your rhythm, recognized.</h3>
               <p className="text-sm leading-relaxed text-white/50">
                 Trace hears the pauses, finds the moments, and understands the shape of a story before you start dragging clips.
               </p>
             </div>
             <div>
-              <span className="mb-5 block font-['Space_Grotesk'] text-5xl tracking-[-0.08em] text-[#64CEFB]">02</span>
+              <span className="mb-5 block font-['Space_Grotesk'] text-5xl tracking-[-0.08em] text-[#A855F7]">02</span>
               <h3 className="mb-3 text-lg font-medium text-white">Polish at the speed of thought.</h3>
               <p className="text-sm leading-relaxed text-white/50">
                 Pick a direction, make it yours, and ship a cut that feels deliberate — not algorithmic.
@@ -463,14 +468,14 @@ export function TraceForgeHero() {
         </div>
       </section>
 
-      <section id="testimonials" className="border-t border-white/10 bg-[#07101b] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+      <section id="testimonials" className="border-t border-white/10 bg-[#09090B] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
         <div className="mx-auto max-w-[1240px]">
           <div className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
-              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#64CEFB]">Made for momentum</p>
+              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#C084FC]">Made for momentum</p>
               <h2 className="font-['Space_Grotesk'] text-4xl font-medium tracking-[-0.07em] text-white sm:text-5xl">Cuts that keep up.</h2>
             </div>
-            <Sparkles className="h-7 w-7 text-[#64CEFB]" />
+            <Sparkles className="h-7 w-7 text-[#A855F7]" />
           </div>
           <div className="grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:grid-cols-3">
             {[
@@ -478,7 +483,7 @@ export function TraceForgeHero() {
               ["“The first cut finally sounds like me.”", "Caleb Rios", "Documentary filmmaker"],
               ["“I can test five hooks before lunch.”", "Juno Park", "Founder, Goodform"],
             ].map(([quote, name, role]) => (
-              <figure key={name} className="bg-[#0b1b29] p-7 sm:p-9">
+              <figure key={name} className="bg-[#120d1b] p-7 sm:p-9">
                 <blockquote className="min-h-[96px] text-xl leading-snug tracking-[-0.04em] text-white">{quote}</blockquote>
                 <figcaption className="mt-8 border-t border-white/10 pt-5">
                   <div className="text-sm font-medium text-white">{name}</div>
@@ -490,12 +495,12 @@ export function TraceForgeHero() {
         </div>
       </section>
 
-      <section id="contact" className="relative overflow-hidden border-t border-white/10 bg-[#64CEFB] px-5 py-24 text-[#07101b] sm:px-8 lg:px-12 lg:py-28">
-        <div className="absolute -right-20 -top-24 h-72 w-72 rounded-full border-[34px] border-[#07101b]/10" />
-        <div className="absolute -bottom-36 left-[36%] h-96 w-96 rounded-full border-[46px] border-[#07101b]/[0.07]" />
+      <section id="contact" className="relative overflow-hidden border-t border-white/10 bg-[#8B5CF6] px-5 py-24 text-[#09090B] sm:px-8 lg:px-12 lg:py-28">
+        <div className="absolute -right-20 -top-24 h-72 w-72 rounded-full border-[34px] border-[#09090B]/10" />
+        <div className="absolute -bottom-36 left-[36%] h-96 w-96 rounded-full border-[46px] border-[#09090B]/[0.07]" />
         <div className="relative mx-auto flex max-w-[1240px] flex-col justify-between gap-10 md:flex-row md:items-end">
           <div>
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#07101b]/60">Your next cut starts here</p>
+            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#09090B]/60">Your next cut starts here</p>
             <h2 className="max-w-3xl font-['Space_Grotesk'] text-5xl font-medium leading-[0.88] tracking-[-0.09em] sm:text-7xl">
               Make the footage
               <br />
@@ -504,17 +509,17 @@ export function TraceForgeHero() {
           </div>
           <a
             href="#home"
-            className="group inline-flex shrink-0 items-center gap-4 rounded-full bg-[#07101b] px-5 py-3.5 text-[12px] font-semibold text-white transition-transform hover:-translate-y-1"
+            className="group inline-flex shrink-0 items-center gap-4 rounded-full bg-[#09090B] px-5 py-3.5 text-[12px] font-semibold text-white shadow-[0_0_28px_rgba(9,9,11,.25)] transition-transform hover:-translate-y-1"
           >
             Start Editing Now
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#64CEFB] text-[#07101b]">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#C084FC] text-[#09090B]">
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </a>
         </div>
       </section>
 
-      <footer className="flex flex-col justify-between gap-4 bg-[#07101b] px-5 py-7 text-[10px] uppercase tracking-[0.18em] text-white/35 sm:flex-row sm:px-8 lg:px-12">
+      <footer className="flex flex-col justify-between gap-4 bg-[#09090B] px-5 py-7 text-[10px] uppercase tracking-[0.18em] text-white/35 sm:flex-row sm:px-8 lg:px-12">
         <span>© 2025 Trace.ai</span>
         <span>Built for the moving image</span>
       </footer>
