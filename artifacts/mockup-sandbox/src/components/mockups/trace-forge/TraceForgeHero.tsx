@@ -108,6 +108,15 @@ const processingMessages = [
   "Generating edit preview...",
 ];
 
+const viralTips = [
+  "X prioritizes early reply velocity. Get 5 to 10 friends to comment within the first 20 minutes to push your post into the For You feed.",
+  "On TikTok, change the visual camera angle or text overlay every 2.5 seconds to reset viewer attention spans and max out watch time.",
+  "Start your audio mid-sentence or right before a beat drop. Skipping standard introductions boosts your 3-second hold rate by over 40 percent.",
+  "Intentionally leave one tiny, harmless mistake in your caption. People in the comments will correct you, driving engagement numbers up.",
+  "Make your final sentence lead directly into your very first sentence so viewers re-watch the opening without realizing it.",
+  "Over 60 percent of short-form videos are watched on mute. Always use high-contrast subtitles on the lower third of the frame.",
+];
+
 function getCircularOffset(index: number, activeIndex: number, length: number) {
   let offset = index - activeIndex;
   if (offset > length / 2) offset -= length;
@@ -117,8 +126,27 @@ function getCircularOffset(index: number, activeIndex: number, length: number) {
 
 function TraceLogo() {
   return (
-    <span className="bg-[linear-gradient(110deg,#C084FC_0%,#A855F7_52%,#7C3AED_100%)] bg-clip-text font-['Space_Grotesk'] text-[1.2rem] font-bold tracking-[0.16em] text-transparent drop-shadow-[0_0_16px_rgba(168,85,247,.28)]">
-      TRACE
+    <span className="flex items-center">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ marginRight: 8, verticalAlign: "middle" }}
+        aria-hidden="true"
+      >
+        <path d="M20 20 H80 V35 H57 V80 H43 V35 H20 Z" fill="url(#violet-grad)" />
+        <defs>
+          <linearGradient id="violet-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#c084fc" />
+            <stop offset="100%" stopColor="#6366f1" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <span className="bg-[linear-gradient(110deg,#C084FC_0%,#A855F7_52%,#7C3AED_100%)] bg-clip-text font-['Space_Grotesk'] text-[1.2rem] font-bold tracking-[0.16em] text-transparent drop-shadow-[0_0_16px_rgba(168,85,247,.28)]">
+        TRACE
+      </span>
     </span>
   );
 }
@@ -766,6 +794,16 @@ function Processing({
   message: string;
   onCancel: () => void;
 }) {
+  const [tipIndex, setTipIndex] = useState(0);
+
+  useEffect(() => {
+    const tipTimer = window.setInterval(() => {
+      setTipIndex((current) => (current + 1) % viralTips.length);
+    }, 4000);
+
+    return () => window.clearInterval(tipTimer);
+  }, []);
+
   return (
     <section className="relative z-10 flex min-h-[calc(100dvh-92px)] items-center justify-center px-5 pb-16 pt-4 sm:px-8">
       <div className="w-full max-w-[720px] text-center">
@@ -792,6 +830,25 @@ function Processing({
               animate={{ width: `${progress}%` }}
               transition={{ ease: "easeOut", duration: 0.4 }}
             />
+          </div>
+          <div className="mt-4 rounded-2xl border border-[#A855F7]/20 bg-white/[0.05] p-4 shadow-[0_0_24px_rgba(168,85,247,.1)]">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#C084FC]">
+              Viral algorithm tip
+            </p>
+            <div className="relative mt-2 min-h-[3.5rem] overflow-hidden">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.p
+                  key={tipIndex}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="text-xs leading-relaxed text-white/70"
+                >
+                  {viralTips[tipIndex]}
+                </motion.p>
+              </AnimatePresence>
+            </div>
           </div>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             {processingMessages.map((item, index) => {
