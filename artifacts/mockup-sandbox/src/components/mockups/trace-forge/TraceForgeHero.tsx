@@ -136,7 +136,7 @@ function TraceLogo() {
         aria-hidden="true"
       />
       <span className="bg-[linear-gradient(110deg,#C084FC_0%,#A855F7_52%,#7C3AED_100%)] bg-clip-text font-['Space_Grotesk'] text-[1.2rem] font-bold tracking-[0.16em] text-transparent drop-shadow-[0_0_16px_rgba(168,85,247,.28)]">
-        TRACE
+        TRACE AI
       </span>
     </span>
   );
