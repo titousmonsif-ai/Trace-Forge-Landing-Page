@@ -799,7 +799,7 @@ function Processing({
   useEffect(() => {
     const tipTimer = window.setInterval(() => {
       setTipIndex((current) => (current + 1) % viralTips.length);
-    }, 4000);
+    }, 2500);
 
     return () => window.clearInterval(tipTimer);
   }, []);
@@ -811,7 +811,24 @@ function Processing({
           <div className="absolute inset-0 rounded-full border border-[#A855F7]/25" />
           <div className="absolute inset-3 rounded-full border border-dashed border-[#C084FC]/50 animate-[spin_8s_linear_infinite]" />
           <div className="absolute inset-8 rounded-full bg-[#A855F7]/20 blur-xl" />
-          <WandSparkles className="relative h-9 w-9 text-[#C084FC]" />
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 100 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ marginRight: 8, verticalAlign: "middle" }}
+            aria-hidden="true"
+            className="relative h-9 w-9"
+          >
+            <path d="M20 20 H80 V35 H57 V80 H43 V35 H20 Z" fill="url(#violet-grad)" />
+            <defs>
+              <linearGradient id="violet-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#c084fc" />
+                <stop offset="100%" stopColor="#6366f1" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
         <p className="mt-9 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#C084FC]">
           Trace / processing edit
