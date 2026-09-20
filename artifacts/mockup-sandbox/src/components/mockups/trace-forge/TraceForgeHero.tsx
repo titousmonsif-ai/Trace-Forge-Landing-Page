@@ -127,23 +127,14 @@ function getCircularOffset(index: number, activeIndex: number, length: number) {
 function TraceLogo() {
   return (
     <span className="flex items-center">
-      <svg
+      <img
+        src="/__mockup/images/trace-ai-mark.png"
+        alt=""
         width="24"
         height="24"
-        viewBox="0 0 100 100"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{ marginRight: 8, verticalAlign: "middle" }}
+        className="mr-2 h-6 w-6 object-contain"
         aria-hidden="true"
-      >
-        <path d="M20 20 H80 V35 H57 V80 H43 V35 H20 Z" fill="url(#violet-grad)" />
-        <defs>
-          <linearGradient id="violet-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#c084fc" />
-            <stop offset="100%" stopColor="#6366f1" />
-          </linearGradient>
-        </defs>
-      </svg>
+      />
       <span className="bg-[linear-gradient(110deg,#C084FC_0%,#A855F7_52%,#7C3AED_100%)] bg-clip-text font-['Space_Grotesk'] text-[1.2rem] font-bold tracking-[0.16em] text-transparent drop-shadow-[0_0_16px_rgba(168,85,247,.28)]">
         TRACE
       </span>
