@@ -115,13 +115,10 @@ function getCircularOffset(index: number, activeIndex: number, length: number) {
   return offset;
 }
 
-function BrandMark() {
+function TraceLogo() {
   return (
-    <span
-      aria-hidden="true"
-      className="relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-white/90"
-    >
-      <span className="h-2.5 w-2.5 rounded-full bg-[#C084FC] shadow-[0_0_14px_rgba(192,132,252,.95)]" />
+    <span className="bg-[linear-gradient(110deg,#C084FC_0%,#A855F7_52%,#7C3AED_100%)] bg-clip-text font-['Space_Grotesk'] text-[1.2rem] font-bold tracking-[0.16em] text-transparent drop-shadow-[0_0_16px_rgba(168,85,247,.28)]">
+      TRACE
     </span>
   );
 }
@@ -162,12 +159,9 @@ function AppHeader({
         type="button"
         onClick={() => onNavigate("landing")}
         className="group flex items-center gap-3 text-left"
-        aria-label="Trace.ai home"
+        aria-label="TRACE home"
       >
-        <BrandMark />
-        <span className="text-[1.05rem] font-semibold tracking-[-0.04em] text-white">
-          Trace<span className="text-[#C084FC]">.ai</span>
-        </span>
+        <TraceLogo />
       </button>
 
       <nav
@@ -657,8 +651,8 @@ function Cockpit({
           </div>
           <label className="mt-8 flex cursor-pointer items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-3 text-[11px] font-semibold text-white/75 transition-colors hover:border-[#A855F7]/70 hover:text-white">
             <Upload className="h-3.5 w-3.5" />
-            Upload another clip
-            <input type="file" accept="video/*" className="sr-only" />
+            Upload media
+            <input type="file" accept="video/*,image/*" className="sr-only" />
           </label>
         </GlassPanel>
 
